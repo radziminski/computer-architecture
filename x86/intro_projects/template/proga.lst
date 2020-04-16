@@ -1,0 +1,12 @@
+     1                                  
+     2                                  section	.text
+     3                                  global  funcName
+     4                                  
+     5                                  funcName:
+     6 00000000 55                      	push	ebp
+     7 00000001 89E5                    	mov		ebp, 	esp
+     8 00000003 8B4508                  	mov		eax, 	DWORD [ebp+8]	; eax <- address of first arg
+     9                                  	
+    10 00000006 8B4508                  	mov		eax, 	[ebp+8]
+    11 00000009 5D                      	pop		ebp
+    12 0000000A C3                      	ret

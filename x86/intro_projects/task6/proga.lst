@@ -1,0 +1,31 @@
+     1                                  
+     2                                  section	.text
+     3                                  global  leaverng
+     4                                  
+     5                                  leaverng:
+     6 00000000 55                      	push	ebp
+     7 00000001 89E5                    	mov		ebp, 	esp
+     8 00000003 8B4508                  	mov		eax, 	DWORD [ebp+8]	; eax <- address of first arg
+     9                                  letterCheck:
+    10 00000006 89C2                    	mov		edx,	eax
+    11 00000008 8A08                    	mov 	cl,		[eax]
+    12 0000000A 84C9                    	test	cl,		cl
+    13 0000000C 7419                    	jz		end
+    14 0000000E 3A4D0C                  	cmp		cl,		[ebp+12]
+    15 00000011 7C08                    	jl		remove
+    16 00000013 3A4D10                  	cmp 	cl,		[ebp+16]
+    17 00000016 7F03                    	jg		remove
+    18 00000018 40                      	inc		eax
+    19 00000019 EBEB                    	jmp		letterCheck
+    20                                  	
+    21                                  remove:
+    22 0000001B 8A4A01                  	mov 	cl,		[edx+1]
+    23 0000001E 880A                    	mov		[edx],	cl
+    24 00000020 42                      	inc		edx
+    25 00000021 84C9                    	test	cl,		cl
+    26 00000023 75F6                    	jnz		remove
+    27 00000025 EBDF                    	jmp 	letterCheck
+    28                                  end:
+    29 00000027 8B4508                  	mov		eax, 	[ebp+8]
+    30 0000002A 5D                      	pop		ebp
+    31 0000002B C3                      	ret

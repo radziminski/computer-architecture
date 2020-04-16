@@ -1,0 +1,15 @@
+MIPS project – exercise 3
+Write a program in MIPS assembly using MARS or other SPIM-compatible simulator. The program should
+not rely on uninitialized register values and should be able to be run more than once without reloading.
+Avoid the sequences of consecutive branches, esp. conditional branches followed by unconditional ones
+(unless necessary).
+All the text processing programs with file i/o should define getc and putc functions for single-character i/o,
+providing proper buffering of input and input operations with at least 512-byte buffers.
+Graphic programs should display images using MARS graphic display mapped to heap address range.
+Maximum score is 6 points. The project may be shown during two lab sessions. Each week of delay started
+will introduce a penalty of one point.
+Projects are assigned according to the position on the ECOAR students list, shown above.
+
+Write a program replacing all non-ASCII characters in a valid C source file with C-language
+hexadecimal escape sequences. The program should be capable of producing valid C source from a
+C program containing non-ASCII characters embedded in strings and character constants.

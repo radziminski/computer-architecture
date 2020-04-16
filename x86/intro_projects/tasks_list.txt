@@ -1,0 +1,30 @@
+Tasks list:
+
+1. char *removerng(char *s, char a, char b);
+	- Remove characters with codes from a to b, a < b.
+2. char *remnth(char *s, int n);
+	- Remove every n/th character.
+3. char *leavelastndig(char *s, int n);
+	- Leave last n digits, rmoving all other characters
+4. char *remrep(char *s);
+	- Remove repetitions of characters.
+5. char *leavelongestnum(char *s, int n);
+	- Leave only the longest sequence of decimal digits.
+6. char *leaverng(char *s, char a, char b);
+	- Leave characters with codes from a to b, a < b
+7. char *remlastnum(char *s);
+	- Remove the last sequence of decimal digits.
+9. unsigned int getdec(char *s);
+	- Scan the first unsigned decimal number.
+10. unsigned int gethex(char *s);
+	- Scan the first hexadecimal number.
+11. char *reversedig(char *s);
+	- Reverse the order of digits, leaving the other characters in their places.
+12. char *reverselet(char *s);
+	- Reverse the order of leters, leaving the other characters in their places.
+13. char *reversepairs(char *s);
+	- Swap characters in pairs
+14. char *replnum(char *s, char a);
+	- Replace each sequence of digits with a specified single character.
+15. char *capwords(char *s);
+	- Capitalize the first character of each word in a string.

@@ -1,0 +1,81 @@
+     1                                  
+     2                                  section	.text
+     3                                  global  replnum
+     4                                  
+     5                                  replnum:
+     6 00000000 55                      	push	ebp
+     7 00000001 89E5                    	mov		ebp, 	esp
+     8 00000003 8B4508                  	mov		eax, 	DWORD [ebp+8]	; eax <- address of first arg
+     9 00000006 31D2                    	xor		edx,	edx
+    10                                  	
+    11                                  letter:
+    12                                  	; getting current char to eax
+    13 00000008 8A08                    	mov		cl,		[eax]
+    14 0000000A 40                      	inc 	eax
+    15                                  	; checking if its end of streing
+    16 0000000B 84C9                    	test 	cl,		cl
+    17 0000000D 743A                    	jz		end
+    18                                  	; checking if its letter
+    19 0000000F 80F931                  	cmp		cl,		'1'
+    20 00000012 7C0E                    	jl		skip
+    21 00000014 80F939                  	cmp		cl,		'9'
+    22 00000017 7F09                    	jg 		skip
+    23                                  	;checking if its first number of part of series of number
+    24 00000019 85D2                    	test	edx,	edx
+    25 0000001B 75EB                    	jnz 	letter
+    26 0000001D 48                      	dec 	eax
+    27                                  	;its first num so storing adress of first num in edx
+    28 0000001E 89C2                    	mov 	edx,	eax
+    29 00000020 EBE6                    	jmp 	letter
+    30                                  skip:
+    31                                  	;checking if we found ending of num sequence
+    32 00000022 85D2                    	test	edx,	edx	
+    33 00000024 74E2                    	jz		letter
+    34                                  	; yes so storing current pointer eax
+    35 00000026 48                      	dec 	eax
+    36 00000027 8A4D0C                  	mov		cl,		[ebp+12]
+    37 0000002A 880A                    	mov		[edx],	cl
+    38 0000002C 42                      	inc 	edx
+    39 0000002D 50                      	push	eax
+    40                                  remove:
+    41                                  	; checking if we deleted all numbers
+    42 0000002E 3B55FC                  	cmp		edx,	[ebp-4]
+    43 00000031 7411                    	jz		endrem
+    44                                  	;decrementing eax since we shifted everything
+    45 00000033 58                      	pop		eax
+    46 00000034 48                      	dec		eax
+    47 00000035 50                      	push	eax
+    48                                  	; storing edx in eax
+    49 00000036 89D0                    	mov		eax,	edx
+    50                                  shiftc:
+    51                                  	;getting next char and storing it at eax
+    52 00000038 8A4801                  	mov		cl,		[eax+1]
+    53 0000003B 8808                    	mov		[eax],	cl
+    54                                  	;checking if its end of number (if its 0)
+    55 0000003D 84C9                    	test	cl,		cl
+    56 0000003F 74ED                    	jz		remove
+    57                                  	; going to next iteration
+    58 00000041 40                      	inc		eax
+    59 00000042 EBF4                    	jmp 	shiftc
+    60                                  	
+    61                                  endrem:
+    62                                  	;after deleting sequence poping eax and zeroing edx, going to next iteration
+    63 00000044 58                      	pop 	eax
+    64 00000045 31D2                    	xor		edx,	edx
+    65 00000047 EBBF                    	jmp		letter
+    66                                  
+    67                                  end:
+    68                                  	;at the end checking if string has not end with number sequence
+    69 00000049 85D2                    	test	edx,	edx
+    70 0000004B 740B                    	jz		epi
+    71                                  	; if yes storing null terminator at beginning of it
+    72 0000004D 8A4D0C                  	mov		cl,		[ebp+12]
+    73 00000050 880A                    	mov		[edx],	cl
+    74 00000052 8A48FF                  	mov		cl,	[eax-1]
+    75 00000055 884A01                  	mov		[edx+1],	cl
+    76                                  epi:
+    77                                  	;epilogue
+    78 00000058 8B4508                  	mov		eax, 	[ebp+8]
+    79 0000005B 89EC                    	mov		esp,		ebp
+    80 0000005D 5D                      	pop		ebp
+    81 0000005E C3                      	ret
